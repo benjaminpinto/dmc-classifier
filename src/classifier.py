@@ -8,6 +8,7 @@ class DMC:
 
     def run(self, sample, dataset):
         count_classified_correctly = 0
+        erros_cometidos = []
         self.build_centroids(dataset)
 
         for s in sample:
@@ -38,15 +39,18 @@ class DMC:
                 print("centroid", Xnear)
                 print("distance", near_distance)
                 print("-")
+                erros_cometidos.append('Amostra: '+ s[4] +' Centróide: ' +Xnear[4])
                 continue
 
             # print(s)
             # print(Xnear)
 
         print("")
-        print("Classified     : ", len(sample))
-        print("Correct        : ", count_classified_correctly)
-        print("Sucess rate (%): ", (count_classified_correctly * 100) / len(sample))
+        print("Classificados     : ", len(sample))
+        print("Corretos        : ", count_classified_correctly)
+        print("Acurácia (%): ", (count_classified_correctly * 100) / len(sample))
+        for n in range(0, len(erros_cometidos)):
+            print("Erros cometidos:"+erros_cometidos[n])
 
 
     def update_centroid(self, s, sampleSize):
@@ -54,8 +58,8 @@ class DMC:
 
         for c in self.centroids:
             if c[len(c) - 1] == s[len(s) - 1]:
-                c = sum(self.dot_product((1 - a), c), self.dot_product(a, s))
-                # c = self.dot_product((1 - a), c) + self.dot_product(a, s)
+                # c = sum(self.dot_product((1 - a), c), self.dot_product(a, s))
+                c = self.dot_product((1 - a), c) + self.dot_product(a, s)
 
 
     def sum_vectors(self, vec1, vec2):

@@ -4,7 +4,7 @@ from src.classifier import DMC
 
 
 dataset = parse_to_array('iris.data')
-sample = random_select_sample(dataset, 80)
+sample = random_select_sample(dataset, 30)
 classifier = DMC()
 
 extract_sample(sample, dataset)
