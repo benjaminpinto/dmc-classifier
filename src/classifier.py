@@ -9,6 +9,7 @@ class DMC:
     def run(self, sample, dataset):
         count_classified_correctly = 0
         erros_cometidos = []
+        acertos = []
         self.build_centroids(dataset)
 
         for s in sample:
@@ -32,14 +33,15 @@ class DMC:
                 print("distance", near_distance)
                 print("-")
                 count_classified_correctly += 1
-                # self.update_centroid(s, len(sample))
+                acertos.append(s[4] + '/' + Xnear[4])
+                self.update_centroid(s, len(sample))
             else:
                 print('fail')
                 print("sample  ", s)
                 print("centroid", Xnear)
                 print("distance", near_distance)
                 print("-")
-                erros_cometidos.append('Amostra: '+ s[4] +' Centróide: ' +Xnear[4])
+                erros_cometidos.append(s[4] +'/' +Xnear[4])
                 continue
 
             # print(s)
@@ -49,8 +51,13 @@ class DMC:
         print("Classificados     : ", len(sample))
         print("Corretos        : ", count_classified_correctly)
         print("Acurácia (%): ", (count_classified_correctly * 100) / len(sample))
+        print(" ------ACERTOS----- ")
+        print("Virgínica: "+acertos.count("Iris-virginica/Iris-virginica").__str__())
+        print("Setosa: "+acertos.count("Iris-setosa/Iris-setosa").__str__())
+        print("Versicolor: "+acertos.count("Iris-versicolor/Iris-versicolor").__str__())
+        print(" ------ERROS----- ")
         for n in range(0, len(erros_cometidos)):
-            print("Erros cometidos:"+erros_cometidos[n])
+            print("Erro:"+erros_cometidos[n])
 
 
     def update_centroid(self, s, sampleSize):
