@@ -33,31 +33,43 @@ class DMC:
                 print("distance", near_distance)
                 print("-")
                 count_classified_correctly += 1
-                acertos.append(s[4] + '/' + Xnear[4])
-                self.update_centroid(s, len(sample))
+                acertos.append(str(s[len(s) - 1]) + '/' + str(Xnear[len(Xnear) - 1]))
+                # self.update_centroid(s, len(sample))
             else:
                 print('fail')
                 print("sample  ", s)
                 print("centroid", Xnear)
                 print("distance", near_distance)
                 print("-")
-                erros_cometidos.append(s[4] +'/' +Xnear[4])
+                erros_cometidos.append(str(s[len(s) - 1]) +'/' + str(Xnear[len(Xnear) - 1]))
                 continue
 
             # print(s)
             # print(Xnear)
+
+        # print("")
+        # print("Classificados     : ", len(sample))
+        # print("Corretos        : ", count_classified_correctly)
+        # print("Acurácia (%): ", (count_classified_correctly * 100) / len(sample))
+        # print(" ------ACERTOS----- ")
+        # print("Virgínica: "+acertos.count("Iris-virginica/Iris-virginica").__str__())
+        # print("Setosa: "+acertos.count("Iris-setosa/Iris-setosa").__str__())
+        # print("Versicolor: "+acertos.count("Iris-versicolor/Iris-versicolor").__str__())
+        # print(" ------ERROS----- ")
+        # for n in range(0, len(erros_cometidos)):
+        #     print("Erro:"+erros_cometidos[n])
 
         print("")
         print("Classificados     : ", len(sample))
         print("Corretos        : ", count_classified_correctly)
         print("Acurácia (%): ", (count_classified_correctly * 100) / len(sample))
         print(" ------ACERTOS----- ")
-        print("Virgínica: "+acertos.count("Iris-virginica/Iris-virginica").__str__())
-        print("Setosa: "+acertos.count("Iris-setosa/Iris-setosa").__str__())
-        print("Versicolor: "+acertos.count("Iris-versicolor/Iris-versicolor").__str__())
+        print("Classe 1: " + acertos.count("1/1").__str__())
+        print("Classe 2: " + acertos.count("2/2").__str__())
+        print("Classe 3: " + acertos.count("3/3").__str__())
         print(" ------ERROS----- ")
         for n in range(0, len(erros_cometidos)):
-            print("Erro:"+erros_cometidos[n])
+            print("Erro:" + erros_cometidos[n])
 
 
     def update_centroid(self, s, sampleSize):
